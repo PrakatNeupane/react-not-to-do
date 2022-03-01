@@ -1,6 +1,7 @@
 import React from 'react'
 
-export const BadList = ({ badList, markAsTask, handleOnDeleteBadList }) => {
+export const BadList = ({ badList, markAsTask, handleOnDeleteBadList, ttlBadHours }) => {
+
     return (
         <div class="col-md-6 mb-5">
             <h2 class="text-center">Bad list</h2>
@@ -34,7 +35,7 @@ export const BadList = ({ badList, markAsTask, handleOnDeleteBadList }) => {
                 </table>
             </div>
             <div class="ttl-bad text-end text-light text-end">
-                Total time saved = <span id="bad-hours">0</span> hr
+                Total time saved = <span id="bad-hours">{ttlBadHours}</span> hr
             </div>
         </div>
     )
