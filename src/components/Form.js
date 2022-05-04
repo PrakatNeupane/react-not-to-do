@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 
 const initialSate = { task: '', hr: '' }
-export const Form = ({ addNewTask }) => {
+const weeklyHours = 24 * 7;
+export const Form = ({ addNewTask, total }) => {
 
     // const [taskList, setTaskList] = useState([]); // taskList is an object here with property of task and hr
     // in order to transfer the data from form to taskList, we are transferring this state to the App.js
@@ -29,6 +30,8 @@ export const Form = ({ addNewTask }) => {
         e.preventDefault();
         // setTaskList([...taskList, newTask]) // same as doing taskList.push but dont do that in react
         // later we take this to App.js
+        if ((newTask.hr < 1)) return alert('Please enter a positive value.')
+        if ((total + newTask.hr) > weeklyHours) return alert("you excedded the weekly hour")
         addNewTask(newTask); // this step is the one added only after you work on the app.js .... not in the beginning
         setNewTask(initialSate); // after this we set the value property in the form input fields
         // we are updating the state with empty fields of initialState so that our input will be empty
@@ -38,21 +41,21 @@ export const Form = ({ addNewTask }) => {
     }
 
     return (
-        <div class="row">
-            <div class="col p-5">
-                <div class="form-box pb-4">
+        <div className="row">
+            <div className="col p-5">
+                <div className="form-box pb-4">
                     <form
 
                         onSubmit={handleOnSubmit}
-                        class="row gx-3 d-flex justify-content-center gy-2 align-items-center"
+                        className="row gx-3 d-flex justify-content-center gy-2 align-items-center"
                     >
-                        <div class="col-md-4">
-                            <label class="visually-hidden" for="specificSizeInputName"
+                        <div className="col-md-4">
+                            <label className="visually-hidden"
                             >Name</label
                             >
                             <input
                                 type="text"
-                                class="form-control"
+                                className="form-control"
                                 name="task"
                                 onChange={handleOnChange}
                                 // previously,we had to do handleOnChange(this), but react does this for us now
@@ -63,14 +66,14 @@ export const Form = ({ addNewTask }) => {
                                 required
                             />
                         </div>
-                        <div class="col-md-4">
-                            <div class="input-group">
+                        <div className="col-md-4">
+                            <div className="input-group">
                                 <input
                                     type="number"
                                     name="hr"
                                     onChange={handleOnChange}
 
-                                    class="form-control"
+                                    className="form-control"
                                     id="specificSizeInputGroupUsername"
                                     placeholder="Hours"
                                     value={newTask.hr} // doing this to clear the input field after submitting
@@ -80,8 +83,8 @@ export const Form = ({ addNewTask }) => {
                             </div>
                         </div>
 
-                        <div class="col-auto">
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                        <div className="col-auto">
+                            <button type="submit" className="btn btn-primary">Submit</button>
                         </div>
                     </form>
                 </div>

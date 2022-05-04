@@ -8,6 +8,8 @@ import { BadList } from './components/BadList';
 import { TotalHours } from './components/TotalHours';
 
 function App() {
+
+
   // for the form data to pass to the tasklist, we first transfer the data to parent
   // for this, we create a function in the parent and by props, call that function in the taskList
   // we are doing this after working for a bit in form
@@ -75,20 +77,21 @@ function App() {
 
   const ttlBadHours = badList.reduce((acc, cur) => acc + cur.hr, 0);
   const ttTaskHours = taskList.reduce((acc, cur) => acc + cur.hr, 0);
-
+  const total = ttlBadHours + ttTaskHours;
 
 
   return (
-    <div class="wrapper">
-      <div class="container">
+    <div className="wrapper">
+      <div className="container">
         {/* Title */}
         <Title></Title>
 
         {/* <!-- Form area --> */}
-        <Form addNewTask={addNewTask}></Form>
+        <Form addNewTask={addNewTask} total={total}></Form>
 
         {/* <!-- list area --> */}
-        <div class="row">
+        <div className="row">
+
           {/* Task list */}
           <TaskList taskList={taskList} handleOnDeleteTaskList={handleOnDeleteTaskList} markAsNotToDo={markAsNotToDo} />
           {/* bad list */}
@@ -96,7 +99,7 @@ function App() {
         </div>
 
         {/* Total time saved */}
-        <TotalHours total={ttlBadHours + ttTaskHours} />
+        <TotalHours total={total} />
       </div>
     </div>
   );
